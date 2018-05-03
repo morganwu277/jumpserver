@@ -105,7 +105,7 @@ class SystemUser(AssetUser):
     priority = models.IntegerField(default=10, verbose_name=_("Priority"))
     protocol = models.CharField(max_length=16, choices=PROTOCOL_CHOICES, default='ssh', verbose_name=_('Protocol'))
     auto_push = models.BooleanField(default=True, verbose_name=_('Auto push'))
-    sudo = models.TextField(default='/bin/whoami', verbose_name=_('Sudo'))
+    sudo = models.TextField(default='ALL=(ALL:ALL) NOPASSWD: /bin/whoami,/bin/ls', verbose_name=_('Sudo'))
     shell = models.CharField(max_length=64,  default='/bin/bash', verbose_name=_('Shell'))
 
     def __str__(self):

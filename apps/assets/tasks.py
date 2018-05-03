@@ -352,7 +352,9 @@ def get_push_system_user_tasks(system_user):
             'action': {
                 'module': 'lineinfile',
                 'args': "dest=/etc/sudoers state=present regexp='^{0} ALL=' "
-                        "line='{0} ALL=(ALL) NOPASSWD: {1}' "
+                        # {0} should be username 
+                        # {1} should be something like this ALL=(ALL:ALL) NOPASSWD: /bin/whoami,/bin/ls
+                        "line='{0} {1}' "
                         "validate='visudo -cf %s'".format(
                     system_user.username,
                     system_user.sudo,

@@ -62,8 +62,7 @@ class AssetUser(models.Model):
     def private_key_file(self):
         if not self.private_key_obj:
             return None
-        project_dir = settings.PROJECT_DIR
-        tmp_dir = os.path.join(project_dir, 'tmp')
+        tmp_dir = os.path.join('/tmp')
         key_str = signer.unsign(self._private_key)
         key_name = '.' + md5(key_str.encode('utf-8')).hexdigest()
         key_path = os.path.join(tmp_dir, key_name)
