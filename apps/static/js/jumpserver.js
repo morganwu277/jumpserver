@@ -154,8 +154,8 @@ function activeNav() {
 function APIUpdateAttr(props) {
     // props = {url: .., body: , success: , error: , method: ,}
     props = props || {};
-    var success_message = props.success_message || '更新成功!';
-    var fail_message = props.fail_message || '更新时发生未知错误.';
+    var success_message = props.success_message || 'Update Success!';
+    var fail_message = props.fail_message || 'Update Failure.';
     var flash_message = props.flash_message || true;
     if (props.flash_message === false){
         flash_message = false;
@@ -198,25 +198,25 @@ function objectDelete(obj, name, url, redirectTo) {
             }
         };
         var fail = function() {
-            swal("错误", "删除"+"[ "+name+" ]"+"遇到错误", "error");
+            swal("Error", "Delete "+"[ "+name+" ]"+" got an error. ", "error");
         };
         APIUpdateAttr({
             url: url,
             body: JSON.stringify(body),
             method: 'DELETE',
-            success_message: "删除成功",
+            success_message: "Delete Success!",
             success: success,
             error: fail
         });
     }
     swal({
-        title: '你确定删除吗 ?',
+        title: 'Are you sure to delete?',
         text: " [" + name + "] ",
         type: "warning",
         showCancelButton: true,
-        cancelButtonText: '取消',
+        cancelButtonText: 'Cancel',
         confirmButtonColor: "#ed5565",
-        confirmButtonText: '确认',
+        confirmButtonText: 'Confirm',
         closeOnConfirm: true,
     }, function () {
         doDelete()       
