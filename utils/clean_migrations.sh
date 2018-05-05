@@ -8,4 +8,4 @@ for d in $(ls);do
         rm -f $d/migrations/00*
     fi
 done
-
+git checkout ../apps

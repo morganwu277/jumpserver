@@ -106,6 +106,8 @@ class SystemUser(AssetUser):
     protocol = models.CharField(max_length=16, choices=PROTOCOL_CHOICES, default='ssh', verbose_name=_('Protocol'))
     auto_push = models.BooleanField(default=True, verbose_name=_('Auto push'))
     sudo = models.TextField(default='ALL=(ALL:ALL) NOPASSWD: /bin/whoami,/bin/ls', verbose_name=_('Sudo'))
+    rootsudo = models.TextField(default='ALL=(root) NOPASSWD: /usr/sbin/nginx,/usr/sbin/iptables,/usr/sbin/iptables-restore,'
+                                        '/usr/sbin/iptables-save,/usr/bin/netstat', verbose_name=_('RootSudo'))
     shell = models.CharField(max_length=64,  default='/bin/bash', verbose_name=_('Shell'))
 
     def __str__(self):

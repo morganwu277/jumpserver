@@ -483,6 +483,10 @@ msgstr "自动推送"
 msgid "Sudo"
 msgstr "Sudo"
 
+#: assets/models/user.py:108 assets/templates/assets/system_user_detail.html:70
+msgid "RootSudo"
+msgstr "RootSudo"
+
 #: assets/models/user.py:109 assets/templates/assets/system_user_detail.html:75
 msgid "Shell"
 msgstr "Shell"

@@ -351,13 +351,28 @@ def get_push_system_user_tasks(system_user):
             'name': 'Set {} sudo setting'.format(system_user.username),
             'action': {
                 'module': 'lineinfile',
-                'args': "dest=/etc/sudoers state=present regexp='^{0} ALL=' "
+                'args': "dest=/etc/sudoers state=present insertafter='includedir' regexp='^{0} ALL=' "
                         # {0} should be username 
                         # {1} should be something like this ALL=(ALL:ALL) NOPASSWD: /bin/whoami,/bin/ls
                         "line='{0} {1}' "
                         "validate='visudo -cf %s'".format(
                     system_user.username,
                     system_user.sudo,
+                )
+            }
+        })
+    if system_user.rootsudo:
+        tasks.append({
+            'name': 'Set {} root sudo setting'.format(system_user.username),
+            'action': {
+                'module': 'lineinfile',
+                'args': "dest=/etc/sudoers state=present insertafter='includedir' regexp='^{0} ALL=\(root\)' "
+                # {0} should be username
+                # {1} should be something like this ALL=(root) NOPASSWD:/usr/sbin/nginx,/usr/sbin/iptables
+                        "line='{0} {1}' "
+                        "validate='visudo -cf %s'".format(
+                    system_user.username,
+                    system_user.rootsudo,
                 )
             }
         })

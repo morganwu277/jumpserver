@@ -63,6 +63,7 @@
                             {% endblock %}
                             <h3>{% trans 'Other' %}</h3>
                             {% bootstrap_field form.sudo layout="horizontal" %}
+                            {% bootstrap_field form.rootsudo layout="horizontal" %}
                             {% bootstrap_field form.shell layout="horizontal" %}
                             {% bootstrap_field form.comment layout="horizontal" %}
                             <div class="form-group">
@@ -85,9 +86,10 @@
         var password_id = '#' + '{{ form.password.id_for_label }}';
         var private_key_id = '#' + '{{ form.private_key_file.id_for_label }}';
         var sudo_id = '#' + '{{ form.sudo.id_for_label }}';
+        var rootsudo_id = '#' + '{{ form.rootsudo.id_for_label }}';
         var shell_id = '#' + '{{ form.shell.id_for_label }}';
 
-        var need_change_field = [auto_generate_key, private_key_id, sudo_id, shell_id] ;
+        var need_change_field = [auto_generate_key, private_key_id, sudo_id, rootsudo_id, shell_id] ;
 
         function authFieldsDisplay() {
             if ($(auto_generate_key).prop('checked')) {

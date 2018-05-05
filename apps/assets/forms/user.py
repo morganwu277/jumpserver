@@ -113,7 +113,7 @@ class SystemUserForm(PasswordAndKeyAuthForm):
         model = SystemUser
         fields = [
             'name', 'username', 'protocol', 'auto_generate_key',
-            'password', 'private_key_file', 'auto_push', 'sudo',
+            'password', 'private_key_file', 'auto_push', 'sudo', 'rootsudo',
             'comment', 'shell', 'priority',
         ]
         widgets = {

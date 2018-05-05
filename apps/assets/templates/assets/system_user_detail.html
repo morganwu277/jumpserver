@@ -70,6 +70,10 @@
                                             <td>{% trans 'Sudo' %}:</td>
                                             <td><b>{{ system_user.sudo }}</b></td>
                                         </tr>
+                                        <tr>
+                                            <td>{% trans 'RootSudo' %}:</td>
+                                            <td><b>{{ system_user.rootsudo }}</b></td>
+                                        </tr>
                                         {% if system_user.shell %}
                                         <tr>
                                             <td>{% trans 'Shell' %}:</td>
