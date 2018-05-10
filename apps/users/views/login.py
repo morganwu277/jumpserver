@@ -248,8 +248,10 @@ class UserFirstLoginView(LoginRequiredMixin, SessionWizardView):
         user = self.request.user
         for form in form_list:
             for field in form:
-                if field.value():
+                if field.value() and field.name != 'password':
                     setattr(user, field.name, field.value())
+                if field.name == 'password':
+                    user.set_password(field.value())
         user.is_first_login = False
         user.is_public_key_valid = True
         user.save()

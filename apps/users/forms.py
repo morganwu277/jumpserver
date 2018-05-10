@@ -42,8 +42,10 @@ class UserCheckOtpCodeForm(forms.Form):
 class UserCreateUpdateForm(forms.ModelForm):
     role_choices = ((i, n) for i, n in User.ROLE_CHOICES if i != User.ROLE_APP)
     password = forms.CharField(
-        label=_('Password'), widget=forms.PasswordInput,
-        max_length=128, strip=False, required=False,
+        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must contain at leaset 1 number and 1 letter!')],
+        min_length=5, max_length=128,
+        widget=forms.PasswordInput,
+        label=_('Password'), strip=False, required=False,
     )
     role = forms.ChoiceField(
         choices=role_choices, required=True,
@@ -106,6 +108,12 @@ class UserCreateUpdateForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    password = forms.CharField(
+        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must contain at leaset 1 number and 1 letter!')],
+        min_length=5, max_length=128,
+        widget=forms.PasswordInput,
+        label=_('Password'), strip=False, required=True,
+    )
     class Meta:
         model = User
         fields = [
@@ -161,13 +169,13 @@ class UserPasswordForm(forms.Form):
         label=_("Old password")
     )
     new_password = forms.CharField(
-        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must Container at leaset 1 number and 1 letter!')],
+        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must contain at leaset 1 number and 1 letter!')],
         min_length=5, max_length=128,
         widget=forms.PasswordInput,
         label=_("New password")
     )
     confirm_password = forms.CharField(
-        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must Container at leaset 1 number and 1 letter!')],
+        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must contain at leaset 1 number and 1 letter!')],
         min_length=5, max_length=128,
         widget=forms.PasswordInput,
         label=_("Confirm password")
