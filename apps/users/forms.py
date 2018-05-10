@@ -1,5 +1,6 @@
 # ~*~ coding: utf-8 ~*~
 
+import django
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
@@ -160,11 +161,13 @@ class UserPasswordForm(forms.Form):
         label=_("Old password")
     )
     new_password = forms.CharField(
+        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must Container at leaset 1 number and 1 letter!')],
         min_length=5, max_length=128,
         widget=forms.PasswordInput,
         label=_("New password")
     )
     confirm_password = forms.CharField(
+        validators=[django.core.validators.RegexValidator(r"^(?=.*[A-Za-z])(?=.*\d)[\S+]{5,128}$", 'Must Container at leaset 1 number and 1 letter!')],
         min_length=5, max_length=128,
         widget=forms.PasswordInput,
         label=_("Confirm password")
