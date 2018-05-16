@@ -114,8 +114,7 @@ class SystemUser(AssetUser):
                                               '    echo "Usage: lcsudo <username>"  \n'
                                               '    return 1 \n'
                                               '  fi \n'
-                                              '  cd /home/$1 \n'
-                                              '  sudo -H -u $1 /bin/bash \n'
+                                              '  sudo -H -u $1 /bin/bash -c "cd /home/$1; /bin/bash" \n'
                                               '} \n'
                                               'alias lll="ls -ltra" \n', verbose_name=_('Bashrc Snippet '))
 
