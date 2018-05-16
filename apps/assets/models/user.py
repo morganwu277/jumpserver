@@ -109,6 +109,15 @@ class SystemUser(AssetUser):
     rootsudo = models.TextField(default='ALL=(root) NOPASSWD: /usr/sbin/nginx,/usr/sbin/iptables,/usr/sbin/iptables-restore,'
                                         '/usr/sbin/iptables-save,/usr/bin/netstat', verbose_name=_('RootSudo'))
     shell = models.CharField(max_length=64,  default='/bin/bash', verbose_name=_('Shell'))
+    bashrc_snippet = models.TextField(default='function lcsudo { \n'
+                                              '  if [[ "$#" != "1" ]]; then \n'
+                                              '    echo "Usage: lcsudo <username>"  \n'
+                                              '    return 1 \n'
+                                              '  fi \n'
+                                              '  cd /home/$1 \n'
+                                              '  sudo -H -u $1 /bin/bash \n'
+                                              '} \n'
+                                              'alias lll="ls -ltra" \n', verbose_name=_('Bashrc Snippet '))
 
     def __str__(self):
         return '{0.name}({0.username})'.format(self)

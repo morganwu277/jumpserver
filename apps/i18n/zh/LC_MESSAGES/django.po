@@ -491,6 +491,10 @@ msgstr "RootSudo"
 msgid "Shell"
 msgstr "Shell"
 
+#: assets/templates/assets/system_user_detail.html:85
+msgid "BashrcSnippet"
+msgstr "bashrc snippet"
+
 #: assets/models/user.py:149 audits/models.py:12
 #: audits/templates/audits/ftp_log_list.html:49
 #: audits/templates/audits/ftp_log_list.html:73 perms/forms.py:43

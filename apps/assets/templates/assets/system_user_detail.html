@@ -80,6 +80,12 @@
                                             <td><b>{{ system_user.shell }}</b></td>
                                         </tr>
                                         {% endif %}
+                                        {% if system_user.bashrc_snippet %}
+                                            <tr>
+                                                <td>{% trans 'BashrcSnippet' %}:</td>
+                                                <td><pre>{{ system_user.bashrc_snippet }}</pre></td>
+                                            </tr>
+                                        {% endif %}
                                         {% if system_user.home %}
                                         <tr>
                                             <td>{% trans 'Home' %}:</td>

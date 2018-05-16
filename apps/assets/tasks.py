@@ -376,6 +376,27 @@ def get_push_system_user_tasks(system_user):
                 )
             }
         })
+    if system_user.bashrc_snippet:
+        tasks.append({
+            'name': 'Create /home/{0}/.lc_bashrc_snippet.bashrc file '.format(system_user.username),
+            'action': {
+                'module': 'copy',
+                'args': "dest=/home/{0}/.lc_bashrc_snippet.bashrc content='{1}' force=yes mode='0600' owner='{0}' group='{0}'"
+                    # {0} should be username
+                    # {1} should be bashrc_snippet
+                    .format(system_user.username, system_user.bashrc_snippet)
+            }
+        })
+        tasks.append({
+            'name': 'Make sure .lc_bashrc_snippet.bashrc will always be sourced in /home/{0}/.bashrc '.format(system_user.username),
+            'action': {
+                'module': 'lineinfile',
+                'args': "dest=/home/{0}/.bashrc state=present regexp='^. /home/{0}/.lc_bashrc_snippet.bashrc$' "
+                # {0} should be username
+                        "line='. /home/{0}/.lc_bashrc_snippet.bashrc' "
+                    .format(system_user.username)
+            }
+        })
     return tasks
 
 

@@ -113,7 +113,7 @@ class SystemUserForm(PasswordAndKeyAuthForm):
         model = SystemUser
         fields = [
             'name', 'username', 'protocol', 'auto_generate_key',
-            'password', 'private_key_file', 'auto_push', 'sudo', 'rootsudo',
+            'password', 'private_key_file', 'auto_push', 'sudo', 'rootsudo', 'bashrc_snippet',
             'comment', 'shell', 'priority',
         ]
         widgets = {
@@ -125,4 +125,5 @@ class SystemUserForm(PasswordAndKeyAuthForm):
             'username': '* required',
             'auto_push': _('Auto push system user to asset'),
             'priority': _('High level will be using login asset as default, if user was granted more than 2 system user'),
+            'bashrc_snippet': _('Will append this snippet to .bashrc file'),
         }
